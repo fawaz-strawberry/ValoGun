@@ -1,6 +1,8 @@
 const express = require('express');
 
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { reset } = require('nodemon');
+const robot = require('robotjs');
 
 
 const app = express();
@@ -173,3 +175,66 @@ app.post("/startCalibration", (req, res) => {
 
     
 })
+
+app.get("/ability0", (req, res) => {
+  console.log("Activating Ability 0")
+  robot.keyTap('c');
+  res.send("Activated")
+})
+
+app.get("/ability1", (req, res) => {
+  console.log("Activating Ability 1")
+  robot.keyTap('q');
+  res.send("Activated")
+})
+
+app.get("/ability2", (req, res) => {
+  console.log("Activating Ability 2")
+  robot.keyTap('e');
+  res.send("Activated")
+})
+
+app.get("/ability3", (req, res) => {
+  console.log("Activating Ability 3")
+  res.send("Activated")
+  robot.keyTap('x');
+})
+
+app.get("/runUp", (reqd, res) => {
+  console.log("Running Up")
+  res.send("Activated")
+  robot.keyToggle('w', "down");
+})
+
+app.get("/runDown", (req, res) => {
+  console.log("Running Down")
+  res.send("Activated")
+  robot.keyToggle('s', "down");
+})
+
+app.get("/runLeft", (req, res) => {
+  console.log("Running Left")
+  res.send("Activated")
+  robot.keyToggle('a', "down");
+})
+
+app.get("/runRight", (req, res) => {
+  console.log("Running Right")
+  res.send("Activated")
+  robot.keyToggle('d', "down");
+})
+
+app.get("/cancelHorizontalRun", (req, res) => {
+  console.log("Cancelling Horizontal Run")
+  res.send("Activated")
+  robot.keyToggle("a", "up")
+  robot.keyToggle("d", "up")
+})
+
+app.get("/cancelVerticalRun", (req, res) => {
+  console.log("Cancelling Vertical Run")
+  res.send("Activated")
+  robot.keyToggle("w", "up")
+  robot.keyToggle("s", "up")
+})
+
