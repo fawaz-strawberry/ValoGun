@@ -2,6 +2,8 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QLabel
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QIcon, QFont
+from threading import Timer
+import time
 
 class App(QMainWindow):
 
@@ -12,6 +14,8 @@ class App(QMainWindow):
         self.top = 100
         self.width = 1920
         self.height = 1080
+        self.index = -1
+        self.poses = ["crouch", "stand", "jump"]
         self.initUI()
 
     def initUI(self):
@@ -19,22 +23,36 @@ class App(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.statusBar().showMessage('Message in statusbar.')
 
-        # button = QPushButton('PyQt5 button', self)
-        # button.setGeometry(100, 70, 200, 200)
-        # button.setToolTip("This is the best button")
-        # button.clicked.connect(self.on_click)
+        button = QPushButton('Start', self)
+        button.setGeometry(self.width / 2 - 200, 70, 200, 200)
+        button.setToolTip("Press to begin recording")
+        button.clicked.connect(self.on_click)
 
-        labelA = QLabel("Times font", self)
-        labelA.setText('Crouch')
-        labelA.setGeometry(100, 70, 1800, 1000)
-        labelA.setFont(QFont('Times', 100))
+        self.labelA = QLabel("Times font", self)
+        self.labelA.setText('Pose Test')
+        self.labelA.setGeometry(self.width / 2 - 900, self.height / 2 - 250, 1900, 500)
+        self.labelA.setFont(QFont('Times', 100))
 
         self.show()
 
 
     @pyqtSlot()
     def on_click(self):
-        print('PyQt5 button click')
+
+        def test_func():
+            max_time = 3
+            start_time = time.time()
+            while(time.time - start_time < max_time):
+
+        print('Button Pressed')
+        self.index += 1
+        if(self.index >= len(self.poses)):
+            exit(0)
+        else:
+            self.labelA.setText(self.poses[self.index])
+        test_func()
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -42,7 +60,7 @@ if __name__ == '__main__':
     sys.exit(app.exec_())
 
 #Create list of different poses
-poses = ["crouch", "stand", "jump"]
+
 
 #For each pose, ask user to do pose and then save video from camera
 #with label of the pose. Connect with phone app to pull the video
