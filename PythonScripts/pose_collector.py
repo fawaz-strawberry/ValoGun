@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QLabel
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from threading import Timer
 import time
@@ -17,6 +17,21 @@ class App(QMainWindow):
         self.index = -1
         self.poses = ["crouch", "stand", "jump"]
         self.initUI()
+        self.i = 0
+        self.poses = ["crouch", "stand", "jump"]
+
+    @pyqtSlot()
+    def update_label(self):
+        print("Updating")
+        self.labelA.setText(self.poses[self.i])
+        self.i += 1
+        if(self.i >= len(self.poses)):
+            self.i = 0
+        self.labelA.setFont(QFont('Times', 100))
+
+    @pyqtSlot()
+    def on_click(self):
+        print('PyQt5 button click')
 
     def initUI(self):
         self.setWindowTitle(self.title)
@@ -58,6 +73,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
     sys.exit(app.exec_())
+
 
 #Create list of different poses
 
