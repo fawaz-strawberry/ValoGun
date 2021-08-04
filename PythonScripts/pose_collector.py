@@ -4,6 +4,7 @@ from PyQt5.QtCore import pyqtSlot, QTimer
 from PyQt5.QtGui import QIcon, QFont
 from threading import Timer
 import time
+import requests
 
 class App(QMainWindow):
 
@@ -17,8 +18,6 @@ class App(QMainWindow):
         self.index = -1
         self.poses = ["crouch", "stand", "jump"]
         self.initUI()
-        self.i = 0
-        self.poses = ["crouch", "stand", "jump"]
 
     @pyqtSlot()
     def update_label(self):
@@ -57,7 +56,11 @@ class App(QMainWindow):
         def test_func():
             max_time = 3
             start_time = time.time()
-            while(time.time - start_time < max_time):
+            #Send Message to start recording
+            while(time.time() - start_time < max_time):
+                pass
+            #Send Message to stop recording
+            print("Finished Loop")
 
         print('Button Pressed')
         self.index += 1
