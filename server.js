@@ -244,12 +244,25 @@ app.get("/buyWeapon", (req, res) => {
   robot.keyTap("b")
 })
 
+app.get("/closeWeapon", (req, res) => {
+  console.log("Buying Weapon")
+  res.send("Buying Weapon Success")
+  robot.keyToggle("b", "up")
+})
+
 
 var weapon_num = 1
 app.get("/swapWeapon", (req, res) => {
   console.log("Switching to weapon")
   res.send("Switching to weapon " + weapon_num)
-  robot.keyTap("" + weapon_num)
+  robot.keyToggle("" + weapon_num, "down")
+
+})
+
+app.get("/stopWeapon", (req, res) => {
+  console.log("Switching to weapon")
+  res.send("Switching to weapon " + weapon_num)
+  robot.keyToggle("" + weapon_num, "up")
   weapon_num += 1
   if (weapon_num === 5)
   {

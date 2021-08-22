@@ -55,21 +55,21 @@ while(True):
         if q == ord("q"):
             break
 
-        with torch.no_grad():
+        # with torch.no_grad():
             # open method used to open different extension image file
-            im = Image.open(r"frame.png")
-            final_im = transforms(im)
-            final_im = final_im.unsqueeze(1)
-            final_im = final_im.to(device)
-            output = model(final_im)
-            print(CLASSES[np.argmax(output.cpu().numpy()[0])])
+            # im = Image.open(r"frame.png")
+            # final_im = transforms(im)
+            # final_im = final_im.unsqueeze(1)
+            # final_im = final_im.to(device)
+            # output = model(final_im)
+            # print(CLASSES[np.argmax(output.cpu().numpy()[0])])
             
-            my_event = CLASSES[np.argmax(output.cpu().numpy()[0])]
-            if(my_event == "stand"):
-                pyautogui.keyUp("shift")
-            if(my_event == "jump"):
-                pyautogui.press("space")                
-            if(my_event == "crouch"):
-                pyautogui.keyDown("shift")
-            pass                                               
+            # my_event = CLASSES[np.argmax(output.cpu().numpy()[0])]
+            # if(my_event == "stand"):
+            #     pyautogui.keyUp("ctrl")
+            # if(my_event == "jump"):
+            #     pyautogui.press("space")                
+            # if(my_event == "crouch"):
+            #     pyautogui.keyDown("ctrl")
+            # pass                                              
 cv2.destroyAllWindows()
