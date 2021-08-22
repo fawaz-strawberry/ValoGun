@@ -203,38 +203,75 @@ app.get("/ability3", (req, res) => {
 app.get("/runUp", (reqd, res) => {
   console.log("Running Up")
   res.send("Activated")
-  robot.keyToggle('w', "down");
+  robot.keyToggle('d', "down");
 })
 
 app.get("/runDown", (req, res) => {
   console.log("Running Down")
   res.send("Activated")
-  robot.keyToggle('s', "down");
+  robot.keyToggle('a', "down");
 })
 
 app.get("/runLeft", (req, res) => {
   console.log("Running Left")
   res.send("Activated")
-  robot.keyToggle('a', "down");
+  robot.keyToggle('w', "down");
 })
 
 app.get("/runRight", (req, res) => {
   console.log("Running Right")
   res.send("Activated")
-  robot.keyToggle('d', "down");
+  robot.keyToggle('s', "down");
 })
 
 app.get("/cancelHorizontalRun", (req, res) => {
   console.log("Cancelling Horizontal Run")
   res.send("Activated")
-  robot.keyToggle("a", "up")
-  robot.keyToggle("d", "up")
+  robot.keyToggle("w", "up")
+  robot.keyToggle("s", "up")
 })
 
 app.get("/cancelVerticalRun", (req, res) => {
   console.log("Cancelling Vertical Run")
   res.send("Activated")
-  robot.keyToggle("w", "up")
-  robot.keyToggle("s", "up")
+  robot.keyToggle("a", "up")
+  robot.keyToggle("d", "up")
 })
 
+app.get("/buyWeapon", (req, res) => {
+  console.log("Buying Weapon")
+  res.send("Buying Weapon Success")
+  robot.keyTap("b")
+})
+
+
+var weapon_num = 1
+app.get("/swapWeapon", (req, res) => {
+  console.log("Switching to weapon")
+  res.send("Switching to weapon " + weapon_num)
+  robot.keyTap("" + weapon_num)
+  weapon_num += 1
+  if (weapon_num === 5)
+  {
+    weapon_num = 1
+  }
+
+})
+
+app.get("/jump", (req, res) => {
+  console.log("Jumping")
+  res.send("Jumping!")
+  robot.keyTap("space")
+})
+
+app.get("/crouch", (req, res) => {
+  console.log("Crouching")
+  res.send("Crouching!")
+  robot.keyToggle("shift", "down")
+})
+
+app.get("/stand", (req, res) => {
+  console.log("Crouching")
+  res.send("Crouching!")
+  robot.keyToggle("shift", "up")
+})
